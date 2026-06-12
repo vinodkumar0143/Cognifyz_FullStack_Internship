@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Successful</title>
+    <link rel="stylesheet" href="/css/style.css?v=1.1">
+</head>
+<body>
+
+    <div class="registration-container">
+        <h2>Registration Successful!</h2>
+        <p>The student has been registered successfully with the following details:</p>
+
+        <div class="success-details">
+            <p><strong>Full Name:</strong> <%= fullName %></p>
+            <p><strong>Email Address:</strong> <%= email %></p>
+            <p><strong>Mobile No:</strong> <%= mobile %></p>
+            <p><strong>College Name:</strong> <%= college %></p>
+            <p><strong>Selected Course:</strong> <%= course %></p>
+        </div>
+
+        <a href="/" class="back-link">Register Another Student</a>
+    </div>
+
+</body>
+</html>
+

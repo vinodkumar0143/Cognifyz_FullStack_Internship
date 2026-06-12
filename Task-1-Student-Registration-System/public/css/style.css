@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+/* CSS Variables for design consistency and easy modifications */
+:root {
+    --bg-primary: #090d16;
+    /* Deep space dark */
+    --card-bg: #131a2b;
+    /* Deep slate card back */
+    --border-color: rgba(255, 255, 255, 0.06);
+
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    /* Soft slate */
+
+    --primary-color: #6366f1;
+    /* Indigo highlight */
+    --primary-hover: #4f46e5;
+    --secondary-color: #14b8a6;
+    /* Teal accent */
+    --accent-glow: rgba(99, 102, 241, 0.2);
+
+    --radius-lg: 20px;
+    --radius-md: 10px;
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Page Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--bg-primary);
+    /* Dynamic double-radial background glow */
+    background-image:
+        radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(20, 184, 166, 0.12) 0px, transparent 50%);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 24px;
+    overflow-x: hidden;
+}
+
+/* Dynamic Acrylic Glass Card */
+.registration-container {
+    background: var(--card-bg);
+    width: 100%;
+    max-width: 520px;
+    padding: 40px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 20px 50px -10px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+    animation: zoomFade 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Aesthetic Top Gradient Border Line */
+.registration-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+}
+
+/* Header Section */
+h2 {
+    font-size: 28px;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+    color: #ffffff;
+}
+
+p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Form Fields */
+.form-field {
+    margin-bottom: 22px;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    font-size: 13.5px;
+    color: #e2e8f0;
+    margin-bottom: 8px;
+    letter-spacing: 0.2px;
+}
+
+/* Premium Dynamic Inputs */
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+select {
+    width: 100%;
+    padding: 13px 16px;
+    background-color: rgba(9, 13, 22, 0.5);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: #ffffff;
+    font-size: 14.5px;
+    font-family: inherit;
+    outline: none;
+    transition: var(--transition-smooth);
+}
+
+/* Dropdown Custom Styles */
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2.5' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 14px;
+    padding-right: 40px;
+}
+
+/* Hover effect: Subtle border highlight */
+input[type="text"]:hover,
+input[type="email"]:hover,
+input[type="tel"]:hover,
+select:hover {
+    border-color: rgba(99, 102, 241, 0.4);
+    background-color: rgba(9, 13, 22, 0.7);
+}
+
+/* Focus effect: Indigo ring and inner light */
+input:focus,
+select:focus {
+    border-color: var(--primary-color);
+    background-color: rgba(9, 13, 22, 0.9);
+    box-shadow: 0 0 0 4px var(--accent-glow);
+}
+
+/* Custom placeholder color */
+::placeholder {
+    color: #475569;
+}
+
+/* Glowing Submit Button */
+.submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, #4f46e5 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: var(--radius-md);
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.25);
+    margin-top: 10px;
+    letter-spacing: 0.3px;
+}
+
+/* Hover: Scale and glow intensity */
+.submit-btn:hover {
+    background: linear-gradient(135deg, #4f46e5 0%, #3730a3 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.45);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+}
+
+/* Success details list layout */
+.success-details {
+    background: rgba(9, 13, 22, 0.4);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    margin-bottom: 30px;
+}
+
+.success-details p {
+    text-align: left;
+    margin-bottom: 15px;
+    color: #e2e8f0;
+    font-size: 14.5px;
+    border-bottom: 1px dotted rgba(255, 255, 255, 0.08);
+    padding-bottom: 12px;
+}
+
+.success-details p:last-child {
+    margin-bottom: 0;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.success-details strong {
+    color: var(--text-secondary);
+    font-weight: 600;
+    display: inline-block;
+    width: 130px;
+}
+
+/* Back Link dynamic hover line */
+.back-link {
+    display: block;
+    text-align: center;
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14.5px;
+    transition: var(--transition-smooth);
+}
+
+.back-link:hover {
+    color: #2dd4bf;
+    /* Brighter teal */
+    transform: translateY(-1px);
+    text-shadow: 0 0 10px rgba(20, 184, 166, 0.3);
+}
+
+/* Keyframe entrance animations */
+@keyframes zoomFade {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Mobile responsive rules */
+@media (max-width: 480px) {
+    .registration-container {
+        padding: 24px 20px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    .success-details strong {
+        display: block;
+        margin-bottom: 4px;
+    }
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration System</title>
+    <link rel="stylesheet" href="/css/style.css?v=1.1">
+</head>
+<body>
+
+    <div class="registration-container">
+        <h2>Student Registration</h2>
+        <p>Fill out the form below to register for a course.</p>
+
+        <!-- Form posts to /register -->
+        <form action="/register" method="POST">
+            
+            <div class="form-field">
+                <label for="fullName">Full Name:</label>
+                <input type="text" id="fullName" name="fullName" required placeholder="Enter full name">
+            </div>
+
+            <div class="form-field">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required placeholder="Enter email address">
+            </div>
+
+            <div class="form-field">
+                <label for="mobile">Mobile No:</label>
+                <input type="tel" id="mobile" name="mobile" required placeholder="Enter 10-digit mobile number">
+            </div>
+
+            <div class="form-field">
+                <label for="college">College Name:</label>
+                <input type="text" id="college" name="college" required placeholder="Enter college name">
+            </div>
+
+            <div class="form-field">
+                <label for="course">Course Selection:</label>
+                <select id="course" name="course" required>
+                    <option value="" disabled selected>Select a course...</option>
+                    <option value="Full-Stack Web Development">Full-Stack Web Development</option>
+                    <option value="Data Science & Analytics">Data Science & Analytics</option>
+                    <option value="Cloud Computing (AWS/GCP)">Cloud Computing (AWS/GCP)</option>
+                    <option value="Mobile App Development">Mobile App Development</option>
+                    <option value="Cyber Security">Cyber Security</option>
+                </select>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit Registration</button>
+            
+        </form>
+    </div>
+
+</body>
+</html>
+
