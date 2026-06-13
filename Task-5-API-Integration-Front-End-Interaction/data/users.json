@@ -1,0 +1,33 @@
+[
+  {
+    "id": "1",
+    "fullName": "Vinod Kumar",
+    "email": "vinodkumarvinnu735@gmail.com",
+    "phone": "9160824233",
+    "dob": "2005-05-19",
+    "role": "Designer",
+    "status": "Active",
+    "createdAt": "2026-06-13T10:00:00.000Z",
+    "updatedAt": "2026-06-13T14:42:30.953Z"
+  },
+  {
+    "id": "2",
+    "fullName": "Jane Doe",
+    "email": "jane.doe@example.com",
+    "phone": "9876543210",
+    "dob": "1998-11-23",
+    "role": "Designer",
+    "status": "Active",
+    "createdAt": "2026-06-12T14:30:00.000Z"
+  },
+  {
+    "id": "3",
+    "fullName": "Alex Smith",
+    "email": "alex.smith@example.com",
+    "phone": "8765432109",
+    "dob": "2001-07-04",
+    "role": "Manager",
+    "status": "Suspended",
+    "createdAt": "2026-06-11T09:15:00.000Z"
+  }
+]
