@@ -1,0 +1,23 @@
+# Contact Form Validation Project - Screenshots Guidelines
+
+To document the application visually, capture and place the following screenshots inside this folder:
+
+1. `01-contact-form-initial.png`
+   - Capture: The initial load state of the contact form.
+   - Details: Highlight the responsive grid layout, the sleek dark glassmorphism card, and clean form inputs before any user interaction.
+
+2. `02-client-validation-triggered.png`
+   - Capture: The form with active client-side validation errors triggered.
+   - Details: Show empty field warnings ("Full Name is required.", "Email address is required.") and format invalidations (e.g. invalid email format, phone digits less than 10) displaying the red input borders and error notices.
+
+3. `03-client-validation-success.png`
+   - Capture: The form with input elements successfully validated.
+   - Details: Show input fields glowing green with checkmark icons representing valid entries.
+
+4. `04-server-validation-error.png`
+   - Capture: Form state showing validation errors caught by the Express server.
+   - Details: Temporarily disable JavaScript in browser DevTools and submit invalid details. Capture the returned page (status 400) showing server-side validation error messages while preserving previously filled form input.
+
+5. `05-submission-success-page.png`
+   - Capture: The dynamic success confirmation page.
+   - Details: Show the "Thank You" title banner with the user's name, the submission summary box, and the scrollable log displaying in-memory submissions stored in Express.

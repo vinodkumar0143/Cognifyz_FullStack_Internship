@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Form | Client & Server Validation</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <div class="contact-container">
+    <h2>Contact Us</h2>
+    <p>Submit your message and we will respond as soon as possible.</p>
+
+    <!-- Form posts to /submit on the server -->
+    <form id="contactForm" action="/submit" method="POST" novalidate>
+      
+      <!-- Full Name Field -->
+      <div class="form-field">
+        <label for="fullName">Full Name:</label>
+        <input 
+          type="text" 
+          id="fullName" 
+          name="fullName" 
+          placeholder="Enter your name" 
+          value="<%= values.fullName || '' %>"
+        >
+        <span class="error-msg" id="error-fullName"><%= errors.fullName || '' %></span>
+      </div>
+
+      <!-- Email Address Field -->
+      <div class="form-field">
+        <label for="email">Email Address:</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email" 
+          placeholder="Enter email address" 
+          value="<%= values.email || '' %>"
+        >
+        <span class="error-msg" id="error-email"><%= errors.email || '' %></span>
+      </div>
+
+      <!-- Phone Number Field -->
+      <div class="form-field">
+        <label for="phone">Phone Number:</label>
+        <input 
+          type="tel" 
+          id="phone" 
+          name="phone" 
+          placeholder="Enter 10-digit number" 
+          value="<%= values.phone || '' %>"
+        >
+        <span class="error-msg" id="error-phone"><%= errors.phone || '' %></span>
+      </div>
+
+      <!-- Subject Field -->
+      <div class="form-field">
+        <label for="subject">Subject:</label>
+        <input 
+          type="text" 
+          id="subject" 
+          name="subject" 
+          placeholder="Enter subject" 
+          value="<%= values.subject || '' %>"
+        >
+        <span class="error-msg" id="error-subject"><%= errors.subject || '' %></span>
+      </div>
+
+      <!-- Message Field -->
+      <div class="form-field">
+        <label for="message">Message:</label>
+        <textarea 
+          id="message" 
+          name="message" 
+          placeholder="Enter your message details (min 15 characters)"
+        ><%= values.message || '' %></textarea>
+        <span class="error-msg" id="error-message"><%= errors.message || '' %></span>
+      </div>
+
+      <button type="submit" class="submit-btn">Send Message</button>
+      
+    </form>
+  </div>
+
+  <!-- Inline Client-Side JavaScript Validation -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('contactForm');
+      
+      const fullName = document.getElementById('fullName');
+      const email = document.getElementById('email');
+      const phone = document.getElementById('phone');
+      const subject = document.getElementById('subject');
+      const message = document.getElementById('message');
+
+      // 1. Validate Full Name
+      function validateFullName() {
+        const val = fullName.value.trim();
+        const errorSpan = document.getElementById('error-fullName');
+        
+        if (val === '') {
+          fullName.classList.add('is-invalid');
+          fullName.classList.remove('is-valid');
+          errorSpan.textContent = 'Full Name is required.';
+          return false;
+        } else if (val.length < 3) {
+          fullName.classList.add('is-invalid');
+          fullName.classList.remove('is-valid');
+          errorSpan.textContent = 'Name must be at least 3 characters long.';
+          return false;
+        } else if (!/^[a-zA-Z\s]+$/.test(val)) {
+          fullName.classList.add('is-invalid');
+          fullName.classList.remove('is-valid');
+          errorSpan.textContent = 'Name must contain only letters and spaces.';
+          return false;
+        } else {
+          fullName.classList.add('is-valid');
+          fullName.classList.remove('is-invalid');
+          errorSpan.textContent = '';
+          return true;
+        }
+      }
+
+      // 2. Validate Email
+      function validateEmail() {
+        const val = email.value.trim();
+        const errorSpan = document.getElementById('error-email');
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        
+        if (val === '') {
+          email.classList.add('is-invalid');
+          email.classList.remove('is-valid');
+          errorSpan.textContent = 'Email address is required.';
+          return false;
+        } else if (!emailRegex.test(val)) {
+          email.classList.add('is-invalid');
+          email.classList.remove('is-valid');
+          errorSpan.textContent = 'Please enter a valid email address.';
+          return false;
+        } else {
+          email.classList.add('is-valid');
+          email.classList.remove('is-invalid');
+          errorSpan.textContent = '';
+          return true;
+        }
+      }
+
+      // 3. Validate Phone Number
+      function validatePhone() {
+        const val = phone.value.trim();
+        const errorSpan = document.getElementById('error-phone');
+        
+        if (val === '') {
+          phone.classList.add('is-invalid');
+          phone.classList.remove('is-valid');
+          errorSpan.textContent = 'Phone number is required.';
+          return false;
+        } else if (!/^\d{10}$/.test(val)) {
+          phone.classList.add('is-invalid');
+          phone.classList.remove('is-valid');
+          errorSpan.textContent = 'Phone number must be exactly 10 digits.';
+          return false;
+        } else {
+          phone.classList.add('is-valid');
+          phone.classList.remove('is-invalid');
+          errorSpan.textContent = '';
+          return true;
+        }
+      }
+
+      // 4. Validate Subject
+      function validateSubject() {
+        const val = subject.value.trim();
+        const errorSpan = document.getElementById('error-subject');
+        
+        if (val === '') {
+          subject.classList.add('is-invalid');
+          subject.classList.remove('is-valid');
+          errorSpan.textContent = 'Subject is required.';
+          return false;
+        } else if (val.length < 5) {
+          subject.classList.add('is-invalid');
+          subject.classList.remove('is-valid');
+          errorSpan.textContent = 'Subject must be at least 5 characters.';
+          return false;
+        } else {
+          subject.classList.add('is-valid');
+          subject.classList.remove('is-invalid');
+          errorSpan.textContent = '';
+          return true;
+        }
+      }
+
+      // 5. Validate Message
+      function validateMessage() {
+        const val = message.value.trim();
+        const errorSpan = document.getElementById('error-message');
+        
+        if (val === '') {
+          message.classList.add('is-invalid');
+          message.classList.remove('is-valid');
+          errorSpan.textContent = 'Message is required.';
+          return false;
+        } else if (val.length < 15) {
+          message.classList.add('is-invalid');
+          message.classList.remove('is-valid');
+          errorSpan.textContent = 'Message must be at least 15 characters long.';
+          return false;
+        } else {
+          message.classList.add('is-valid');
+          message.classList.remove('is-invalid');
+          errorSpan.textContent = '';
+          return true;
+        }
+      }
+
+      // Bind validation triggers on user interaction
+      fullName.addEventListener('blur', validateFullName);
+      fullName.addEventListener('input', validateFullName);
+
+      email.addEventListener('blur', validateEmail);
+      email.addEventListener('input', validateEmail);
+
+      phone.addEventListener('blur', validatePhone);
+      phone.addEventListener('input', validatePhone);
+
+      subject.addEventListener('blur', validateSubject);
+      subject.addEventListener('input', validateSubject);
+
+      message.addEventListener('blur', validateMessage);
+      message.addEventListener('input', validateMessage);
+
+      // Final submit event intercept
+      form.addEventListener('submit', (event) => {
+        const isNameValid = validateFullName();
+        const isEmailValid = validateEmail();
+        const isPhoneValid = validatePhone();
+        const isSubjectValid = validateSubject();
+        const isMessageValid = validateMessage();
+
+        const isFormValid = isNameValid && isEmailValid && isPhoneValid && isSubjectValid && isMessageValid;
+
+        if (!isFormValid) {
+          event.preventDefault(); // Stop form submission
+        }
+      });
+    });
+  </script>
+</body>
+</html>

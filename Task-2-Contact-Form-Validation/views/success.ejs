@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Submission Successful</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <div class="contact-container" style="max-width: 750px;">
+    <h2 style="color: var(--success); margin-bottom: 5px;">✓ Submission Successful!</h2>
+    <p>Your message has been verified and stored in the server's memory.</p>
+
+    <!-- Detailed view of the current submission -->
+    <div class="success-details">
+      <p><strong>Submission ID:</strong> <%= current.id %></p>
+      <p><strong>Full Name:</strong> <%= current.fullName %></p>
+      <p><strong>Email Address:</strong> <%= current.email %></p>
+      <p><strong>Phone Number:</strong> <%= current.phone %></p>
+      <p><strong>Subject:</strong> <%= current.subject %></p>
+      <p><strong>Message:</strong> <%= current.message %></p>
+      <p><strong>Submitted At:</strong> <%= current.submittedAt %></p>
+    </div>
+
+    <!-- Submissions logs table -->
+    <% if (allSubmissions && allSubmissions.length > 0) { %>
+      <div class="log-section">
+        <h3>Server Submissions Log (Temporary Memory)</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Subject</th>
+                <th>Submitted At</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% allSubmissions.forEach(sub => { %>
+                <tr <%= sub.id === current.id ? 'style="background-color: rgba(16, 185, 129, 0.1);"' : '' %>>
+                  <td><%= sub.id %></td>
+                  <td><strong><%= sub.fullName %></strong></td>
+                  <td><%= sub.email %></td>
+                  <td><%= sub.subject %></td>
+                  <td><%= sub.submittedAt %></td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    <% } %>
+
+    <a href="/" class="back-link">Send Another Message</a>
+  </div>
+
+</body>
+</html>
