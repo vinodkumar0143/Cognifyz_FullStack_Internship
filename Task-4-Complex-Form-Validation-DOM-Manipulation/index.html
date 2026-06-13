@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cognifyz Internship - Complex Validation & DOM Manipulation</title>
+  
+  <!-- Bootstrap 5 CSS CDN -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  
+  <!-- Bootstrap Icons CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+  
+  <!-- Custom Styling Link -->
+  <link rel="stylesheet" href="css/style.css?v=1.2">
+</head>
+<body>
+
+  <!-- Glassmorphism Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom sticky-top">
+    <div class="container">
+      <a class="navbar-brand navbar-brand-custom" href="#home">
+        <i class="bi bi-shield-check me-2"></i>SecureCore
+      </a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="#home"><i class="bi bi-house-door-fill me-1"></i>Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="#register"><i class="bi bi-person-plus-fill me-1"></i>Register Form</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link nav-link-custom" href="#users"><i class="bi bi-people-fill me-1"></i>Submitted Users</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- --- SECTION 1: HOME --- -->
+  <section id="home" class="app-section container active">
+    <div class="row align-items-center py-5">
+      <div class="col-lg-6 mb-5 mb-lg-0 text-center text-lg-start">
+        <span class="badge badge-indigo-custom px-3 py-2 rounded-pill mb-3">
+          Cognifyz Full-Stack Internship - Task 4
+        </span>
+        <h1 class="hero-title mb-4">
+          Next-Gen <span class="text-gradient">Client-Side Validation</span> Platform
+        </h1>
+        <p class="sub-hero mb-4">
+          Experience highly visual, real-time validation checks for all key data points alongside fluid Single Page App section transitions. Save your records locally and filter through them in real-time.
+        </p>
+        <div class="d-flex flex-wrap gap-3 justify-content-center justify-content-lg-start">
+          <a href="#register" class="btn btn-primary-custom btn-lg">
+            Get Started <i class="bi bi-arrow-right ms-2"></i>
+          </a>
+          <a href="#users" class="btn btn-outline-light border-secondary btn-lg rounded-3 px-4">
+            <i class="bi bi-database me-2"></i>View Users
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="row g-4">
+          <div class="col-sm-6">
+            <div class="glass-card p-4 h-100">
+              <i class="bi bi-shield-lock-fill text-indigo fs-1 mb-3"></i>
+              <h4>Advanced Regex</h4>
+              <p class="text-muted mb-0">Strict criteria checks for Email, Name, and 10-digit Phone numbers.</p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="glass-card p-4 h-100">
+              <i class="bi bi-speedometer text-secondary fs-1 mb-3"></i>
+              <h4>Strength Meter</h4>
+              <p class="text-muted mb-0">Dynamic password strength tracking updates live as you type.</p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="glass-card p-4 h-100">
+              <i class="bi bi-calendar-check-fill text-indigo fs-1 mb-3"></i>
+              <h4>Age Validator</h4>
+              <p class="text-muted mb-0">Protects submission flow enforcing a 18+ age validation ceiling.</p>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="glass-card p-4 h-100">
+              <i class="bi bi-window-sidebar text-secondary fs-1 mb-3"></i>
+              <h4>SPA Routing</h4>
+              <p class="text-muted mb-0">Hash-based section management without page refreshing.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="row mt-5">
+      <div class="col-12">
+        <div class="glass-card py-4 px-2">
+          <div class="row text-center">
+            <div class="col-md-6 mb-4 mb-md-0 border-end border-secondary-subtle">
+              <div class="stat-box">
+                <div class="stat-number" id="userCountStat">0</div>
+                <div class="text-muted">Total Registered Accounts</div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="stat-box">
+                <div class="stat-number" id="activeUsersStat">0</div>
+                <div class="text-muted">Active Sessions Saved</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- --- SECTION 2: REGISTRATION FORM --- -->
+  <section id="register" class="app-section container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-xl-7">
+        <div class="glass-card p-5">
+          <div class="text-center mb-4">
+            <i class="bi bi-person-bounding-box text-indigo fs-1 mb-2"></i>
+            <h2 class="fw-bold mb-1">Create Account</h2>
+            <p class="text-muted">Fill out the details below to register. All fields are verified live.</p>
+          </div>
+
+          <form id="registrationForm" novalidate>
+            <div class="row">
+              <!-- Name Field -->
+              <div class="col-md-6">
+                <div class="form-group-custom">
+                  <label for="fullName" class="form-label small fw-bold">Full Name</label>
+                  <input type="text" class="form-control form-control-custom" id="fullName" placeholder="e.g. Vinod Kumar" required>
+                  <span class="validation-message" id="fullNameFeedback"></span>
+                </div>
+              </div>
+
+              <!-- Email Field -->
+              <div class="col-md-6">
+                <div class="form-group-custom">
+                  <label for="email" class="form-label small fw-bold">Email Address</label>
+                  <input type="email" class="form-control form-control-custom" id="email" placeholder="name@domain.com" required>
+                  <span class="validation-message" id="emailFeedback"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <!-- Phone Number -->
+              <div class="col-md-6">
+                <div class="form-group-custom">
+                  <label for="phone" class="form-label small fw-bold">Phone Number</label>
+                  <input type="tel" class="form-control form-control-custom" id="phone" placeholder="10-digit number" required>
+                  <span class="validation-message" id="phoneFeedback"></span>
+                </div>
+              </div>
+
+              <!-- DOB (Age Validation) -->
+              <div class="col-md-6">
+                <div class="form-group-custom">
+                  <label for="dob" class="form-label small fw-bold">Date of Birth</label>
+                  <input type="date" class="form-control form-control-custom" id="dob" required>
+                  <span class="validation-message" id="dobFeedback"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Password Field -->
+            <div class="form-group-custom">
+              <label for="password" class="form-label small fw-bold">Password</label>
+              <div class="password-wrapper">
+                <input type="password" class="form-control form-control-custom" id="password" placeholder="Min. 8 characters, complex" required>
+                <button type="button" class="password-toggle-btn" id="togglePassword" aria-label="Toggle Password Visibility">
+                  <i class="bi bi-eye"></i>
+                </button>
+              </div>
+              
+              <!-- Password Strength Indicator -->
+              <div class="strength-meter-container">
+                <div class="strength-meter-bar">
+                  <div class="strength-meter-fill" id="strengthMeterFill"></div>
+                </div>
+                <span class="strength-text" id="strengthText"></span>
+              </div>
+              <span class="validation-message" id="passwordFeedback"></span>
+            </div>
+
+            <!-- Confirm Password Field -->
+            <div class="form-group-custom">
+              <label for="confirmPassword" class="form-label small fw-bold">Confirm Password</label>
+              <div class="password-wrapper">
+                <input type="password" class="form-control form-control-custom" id="confirmPassword" placeholder="Re-enter your password" required>
+                <button type="button" class="password-toggle-btn" id="toggleConfirmPassword" aria-label="Toggle Password Visibility">
+                  <i class="bi bi-eye"></i>
+                </button>
+              </div>
+              <span class="validation-message" id="confirmPasswordFeedback"></span>
+            </div>
+
+            <!-- Submit CTA -->
+            <div class="d-grid mt-4">
+              <button type="submit" class="btn btn-primary-custom" id="submitBtn">
+                <i class="bi bi-person-check-fill me-2"></i>Register Account
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- --- SECTION 3: SUBMITTED USERS --- -->
+  <section id="users" class="app-section container">
+    <div class="glass-card p-5">
+      <div class="row align-items-center mb-4">
+        <div class="col-md-6 mb-3 mb-md-0 text-center text-md-start">
+          <h2 class="fw-bold mb-1"><i class="bi bi-folder-symlink text-indigo me-2"></i>Submitted Users</h2>
+          <p class="text-muted mb-0">View, search, or delete registered user accounts in real-time.</p>
+        </div>
+        <div class="col-md-6 text-center text-md-end">
+          <button class="btn btn-outline-danger rounded-3" id="clearUsersBtn">
+            <i class="bi bi-trash-fill me-1"></i>Clear All Records
+          </button>
+        </div>
+      </div>
+
+      <!-- Search Input Filter bar -->
+      <div class="row mb-5 justify-content-center">
+        <div class="col-md-8 col-lg-6">
+          <div class="input-group search-input-group">
+            <span class="input-group-text"><i class="bi bi-search"></i></span>
+            <input type="text" class="form-control" id="searchUser" placeholder="Search by name, email, or phone...">
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Cards Grid -->
+      <div class="row" id="usersGrid">
+        <!-- Rendered dynamically by main.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Global Footer -->
+  <footer class="text-center mt-auto">
+    <div class="container">
+      <p class="mb-1">Cognifyz Full-Stack Web Development Internship</p>
+      <p class="mb-0 text-muted small">&copy; 2026 Vinod Kumar. Project isolated in Task-4-Complex-Form-Validation-DOM-Manipulation.</p>
+    </div>
+  </footer>
+
+  <!-- Custom Success/Error Toast notification -->
+  <div class="custom-toast" id="customToast">
+    <i class="bi bi-info-circle-fill"></i>
+    <span id="toastMessage"></span>
+  </div>
+
+  <!-- Bootstrap 5 JS Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- App logic JS -->
+  <script src="js/main.js"></script>
+</body>
+</html>
