@@ -1,0 +1,23 @@
+# Task 3: Advanced CSS Styling and Responsive Design - Screenshots Guidelines
+
+Capture and place the following layout screenshots inside this folder for final project documentation:
+
+1. `01-desktop-view.png`
+   - Capture: The full index.html viewport on a standard desktop screen (width >= 1200px).
+   - Details: Highlight the horizontal glassmorphic navbar, the hero section with gradient headings, and the aligned side-by-side elements.
+
+2. `02-tablet-view.png`
+   - Capture: The webpage resized to tablet width (width around 768px).
+   - Details: Show columns wrapping neatly, elements stacking in 2-column or 1-column layouts, and the navbar hamburger toggle.
+
+3. `03-mobile-view.png`
+   - Capture: The webpage resized to mobile viewport (width around 375px - 414px).
+   - Details: Show full 1-column vertical stacking, responsive font sizing scaling, and spacing around card margins.
+
+4. `04-interactive-hover.png`
+   - Capture: A focused close-up screenshot showing a Service Card state under active hover.
+   - Details: Demonstrate the transition effects, scale-up elevation, shadow glow, and icon color shift.
+
+5. `05-scroll-fade.png`
+   - Capture: Elements with `.scroll-animate` class triggering and fading into view on scroll.
+   - Details: Capture the entry transition state of the Services or About sections as you scroll down the page.
