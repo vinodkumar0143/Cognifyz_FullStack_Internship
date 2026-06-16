@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SecureCore Auth - Secure session-based authentication portal integrated with MongoDB. Sign up or log in to view protected system data.">
+    <title>SecureCore | Authentication Portal</title>
+    <!-- Google Fonts: Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app-wrapper">
+        <!-- Floating Ambient Background Circles -->
+        <div class="bg-circle purple"></div>
+        <div class="bg-circle cyan"></div>
+
+        <!-- Connection Alert Banner (DB Check) -->
+        <div class="db-status-banner hidden" id="dbStatusBanner">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span id="dbStatusText">Checking database connection...</span>
+        </div>
+
+        <!-- Auth Container -->
+        <div class="auth-container" id="authSection">
+            <!-- Header Brand -->
+            <div class="brand">
+                <i class="fa-solid fa-shield-halved logo-icon"></i>
+                <span class="logo-text">Secure<span>Core</span></span>
+            </div>
+            
+            <!-- Auth Card -->
+            <div class="auth-card">
+                <!-- Tab Toggles -->
+                <div class="auth-tabs">
+                    <button type="button" class="tab-btn active" id="tabLoginBtn">Sign In</button>
+                    <button type="button" class="tab-btn" id="tabRegisterBtn">Create Account</button>
+                </div>
+
+                <!-- Sign In Form -->
+                <div class="auth-form-panel" id="loginPanel">
+                    <div class="panel-header">
+                        <h2>Welcome Back</h2>
+                        <p>Sign in to access your secure profile dashboard.</p>
+                    </div>
+                    <form id="loginForm" novalidate>
+                        <div class="form-group">
+                            <label for="loginEmail">Email Address</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-envelope field-icon"></i>
+                                <input type="email" id="loginEmail" placeholder="e.g. user@example.com" required>
+                            </div>
+                            <span class="error-msg" id="errLoginEmail"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Password</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-lock field-icon"></i>
+                                <input type="password" id="loginPassword" placeholder="••••••••" required>
+                            </div>
+                            <span class="error-msg" id="errLoginPassword"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block" id="loginSubmitBtn">
+                            <span class="btn-text">Log In</span>
+                            <span class="btn-spinner hidden"><i class="fa-solid fa-circle-notch fa-spin"></i></span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Register Form -->
+                <div class="auth-form-panel hidden" id="registerPanel">
+                    <div class="panel-header">
+                        <h2>Get Started</h2>
+                        <p>Create a secure profile with credentials in our database.</p>
+                    </div>
+                    <form id="registerForm" novalidate>
+                        <div class="form-group">
+                            <label for="regUsername">Username</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-user field-icon"></i>
+                                <input type="text" id="regUsername" placeholder="e.g. johndoe" required>
+                            </div>
+                            <span class="error-msg" id="errRegUsername"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="regEmail">Email Address</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-envelope field-icon"></i>
+                                <input type="email" id="regEmail" placeholder="e.g. john@example.com" required>
+                            </div>
+                            <span class="error-msg" id="errRegEmail"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="regPassword">Password</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-lock field-icon"></i>
+                                <input type="password" id="regPassword" placeholder="Minimum 6 characters" required>
+                            </div>
+                            <span class="error-msg" id="errRegPassword"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="regRole">Select Role (Authorization Level)</label>
+                            <div class="input-wrapper">
+                                <i class="fa-solid fa-briefcase field-icon"></i>
+                                <select id="regRole" required>
+                                    <option value="user" selected>Standard User (Access Protected Data Only)</option>
+                                    <option value="admin">Administrator (Access Admin-Only Routes)</option>
+                                </select>
+                            </div>
+                            <span class="error-msg" id="errRegRole"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block" id="regSubmitBtn">
+                            <span class="btn-text">Register Account</span>
+                            <span class="btn-spinner hidden"><i class="fa-solid fa-circle-notch fa-spin"></i></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Container (Authenticated User Interface) -->
+        <div class="dashboard-container hidden" id="dashboardSection">
+            <!-- Sidebar -->
+            <aside class="dashboard-sidebar">
+                <div class="brand">
+                    <i class="fa-solid fa-shield-halved logo-icon"></i>
+                    <span class="logo-text">Secure<span>Core</span></span>
+                </div>
+                <div class="profile-card">
+                    <div class="avatar-lg" id="profileAvatar">U</div>
+                    <h3 id="profileName">Username</h3>
+                    <p id="profileEmail">user@example.com</p>
+                    <span class="role-badge" id="profileRoleBadge">USER</span>
+                </div>
+                <nav class="sidebar-nav">
+                    <button type="button" class="sidebar-item active" id="menuOverviewBtn">
+                        <i class="fa-solid fa-network-wired"></i> Overview
+                    </button>
+                    <button type="button" class="sidebar-item btn-logout" id="logoutBtn">
+                        <i class="fa-solid fa-power-off"></i> Log Out
+                    </button>
+                </nav>
+            </aside>
+
+            <!-- Main Panel -->
+            <main class="dashboard-main">
+                <!-- Top Header -->
+                <header class="dashboard-header">
+                    <h1>Secure Session Analytics</h1>
+                    <div class="server-status">
+                        <span class="status-dot green"></span>
+                        <span>Server Session Active</span>
+                    </div>
+                </header>
+
+                <!-- Actions & Analytics Grid -->
+                <div class="dashboard-content-grid">
+                    <!-- Actions Pane -->
+                    <div class="dashboard-card action-panel">
+                        <h2>API Route Access Guards</h2>
+                        <p class="description">Click the buttons below to test server-side authentication and role-based authorization filters.</p>
+                        
+                        <div class="action-buttons-list">
+                            <!-- Button 1: Fetch Protected Data (All users) -->
+                            <div class="action-row">
+                                <button type="button" class="btn btn-primary" id="fetchProtectedBtn">
+                                    <i class="fa-solid fa-user-shield"></i> Fetch Protected Data
+                                </button>
+                                <span class="action-info">Requires basic user authentication</span>
+                            </div>
+
+                            <!-- Button 2: Fetch Admin Data (Admin users only) -->
+                            <div class="action-row">
+                                <button type="button" class="btn btn-cyan" id="fetchAdminBtn">
+                                    <i class="fa-solid fa-lock"></i> Fetch Admin-Only Data
+                                </button>
+                                <span class="action-info">Requires administrator role authorization</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- JSON Data Display Panel -->
+                    <div class="dashboard-card console-panel">
+                        <div class="console-header">
+                            <h2>JSON Response Output</h2>
+                            <button type="button" class="console-clear-btn" id="clearConsoleBtn">Clear</button>
+                        </div>
+                        <div class="console-body">
+                            <!-- Empty / Placeholder State -->
+                            <div class="console-placeholder" id="consolePlaceholder">
+                                <i class="fa-solid fa-terminal"></i>
+                                <p>Execute an API call on the left to display server responses here in real-time.</p>
+                            </div>
+                            <!-- Live Response Block -->
+                            <pre class="console-output hidden" id="consoleOutput"><code></code></pre>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Application Script -->
+    <script src="js/app.js"></script>
+</body>
+</html>

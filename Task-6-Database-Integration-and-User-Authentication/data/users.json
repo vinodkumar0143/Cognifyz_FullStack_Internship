@@ -1,0 +1,34 @@
+[
+  {
+    "id": "1781364410376",
+    "username": "alice_user",
+    "email": "alice@example.com",
+    "password": "$2a$10$I3lTcrg0D38lV5lDR4RXuul3zH9NELTV9gHy3EqzRqs4PEnobGhre",
+    "role": "user",
+    "createdAt": "2026-06-13T15:26:50.376Z"
+  },
+  {
+    "id": "1781364810476",
+    "username": "bob_admin",
+    "email": "bob@example.com",
+    "password": "$2a$10$eIIv2aFAUjcyNCoGLB6zse/53p8S/GvaLPZ5XTWFOS9nvK4FjUspy",
+    "role": "admin",
+    "createdAt": "2026-06-13T15:33:30.476Z"
+  },
+  {
+    "id": "1781365173948",
+    "username": "vinod kumar",
+    "email": "vinodkumarvinnu735@gmail.com",
+    "password": "$2a$10$Vov1l0NJ3CIgoq6.oErA0Oel/kjgUY0TpJGjsKQwsYkteAbXKvVZy",
+    "role": "user",
+    "createdAt": "2026-06-13T15:39:33.948Z"
+  },
+  {
+    "id": "1781365446672",
+    "username": "vinod",
+    "email": "vinod12@gmail.com",
+    "password": "$2a$10$uUcXltTpPQitXcuwrelNje/hZ.5Sx5A1cN7KIF0xxGxZ3KPNC.vJG",
+    "role": "admin",
+    "createdAt": "2026-06-13T15:44:06.672Z"
+  }
+]

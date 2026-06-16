@@ -1,0 +1,31 @@
+{
+  "name": "task-6-database-integration-and-user-authentication",
+  "version": "1.0.0",
+  "description": "Database Integration and User Authentication - Task 6 for Cognifyz Full Stack Development Internship.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "mongoose": "^8.24.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "mongodb",
+    "mongoose",
+    "authentication",
+    "bcryptjs",
+    "express-session"
+  ],
+  "author": "Vinod Kumar",
+  "license": "ISC"
+}
