@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CogniWeather - Advanced API Integration</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Toast Notification Container -->
+    <div id="toast-container"></div>
+
+    <div class="app-container">
+        <!-- HEADER -->
+        <header class="app-header">
+            <div class="logo-area">
+                <div class="logo-icon"><i class="fa-solid fa-cloud-bolt"></i></div>
+                <div class="logo-text">
+                    <h1>CogniWeather</h1>
+                    <span>Task 7: Advanced API & Integration</span>
+                </div>
+            </div>
+            
+            <div class="header-status">
+                <div class="status-badge" id="db-status-badge">
+                    <span class="indicator"></span>
+                    <span class="label">Checking DB...</span>
+                </div>
+                <div class="status-badge" id="api-status-badge">
+                    <span class="indicator blue"></span>
+                    <span class="label">Checking API...</span>
+                </div>
+                <div class="user-session" id="user-session">
+                    <span class="user-welcome"><i class="fa-solid fa-user-circle"></i> <span id="session-username">Guest</span></span>
+                    <button id="logout-btn" class="btn btn-sm btn-logout"><i class="fa-solid fa-power-off"></i> Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- MAIN LAYOUT -->
+        <main class="app-main">
+            <!-- GUEST VIEW: Auth Forms -->
+            <section id="guest-view" class="auth-section">
+                <div class="auth-card-wrapper">
+                    <!-- Login Form -->
+                    <div class="auth-card active" id="login-card">
+                        <div class="auth-header">
+                            <h2>Welcome Back</h2>
+                            <p>Login to search weather and log your query history</p>
+                        </div>
+                        <form id="login-form" autocomplete="on">
+                            <div class="form-group">
+                                <label for="login-email">Email Address</label>
+                                <div class="input-wrapper">
+                                    <i class="fa-regular fa-envelope"></i>
+                                    <input type="email" id="login-email" required placeholder="name@example.com">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="login-password">Password</label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-lock"></i>
+                                    <input type="password" id="login-password" required placeholder="••••••••">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">
+                                <span>Sign In</span> <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </form>
+                        <div class="auth-footer">
+                            <p>Don't have an account? <a href="#" id="to-register">Create account</a></p>
+                        </div>
+                    </div>
+
+                    <!-- Register Form -->
+                    <div class="auth-card" id="register-card">
+                        <div class="auth-header">
+                            <h2>Create Account</h2>
+                            <p>Join to access secure weather searches</p>
+                        </div>
+                        <form id="register-form" autocomplete="on">
+                            <div class="form-group">
+                                <label for="register-username">Username</label>
+                                <div class="input-wrapper">
+                                    <i class="fa-regular fa-user"></i>
+                                    <input type="text" id="register-username" required placeholder="john_doe" minlength="3">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="register-email">Email Address</label>
+                                <div class="input-wrapper">
+                                    <i class="fa-regular fa-envelope"></i>
+                                    <input type="email" id="register-email" required placeholder="john@example.com">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="register-password">Password</label>
+                                <div class="input-wrapper">
+                                    <i class="fa-solid fa-lock"></i>
+                                    <input type="password" id="register-password" required placeholder="••••••••" minlength="6">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-accent btn-block">
+                                <span>Register Account</span> <i class="fa-solid fa-user-plus"></i>
+                            </button>
+                        </form>
+                        <div class="auth-footer">
+                            <p>Already have an account? <a href="#" id="to-login">Sign in here</a></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AUTHENTICATED DASHBOARD VIEW -->
+            <section id="dashboard-view" class="dashboard-section">
+                <div class="dashboard-grid">
+                    
+                    <!-- Left: Weather Search and History -->
+                    <div class="grid-left">
+                        <!-- Search Card -->
+                        <div class="dash-card search-card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-magnifying-glass-location"></i> Weather Lookup</h3>
+                                <span class="card-subtitle">Search current weather conditions</span>
+                            </div>
+                            <form id="search-form">
+                                <div class="search-box">
+                                    <input type="text" id="search-city" placeholder="Enter city name (e.g. London, Paris, Tokyo)..." required autocomplete="off">
+                                    <button type="submit" class="btn btn-search"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
+                                </div>
+                            </form>
+                            <div class="suggestions">
+                                <span>Try: </span>
+                                <button class="suggest-btn">Paris</button>
+                                <button class="suggest-btn">New York</button>
+                                <button class="suggest-btn">Tokyo</button>
+                                <button class="suggest-btn">Mumbai</button>
+                            </div>
+                        </div>
+
+                        <!-- Search History Card -->
+                        <div class="dash-card history-card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-clock-rotate-left"></i> Search History</h3>
+                                <button id="clear-history-btn" class="btn btn-sm btn-clear" title="Clear All History"><i class="fa-solid fa-trash-can"></i> Clear All</button>
+                            </div>
+                            <div class="history-list-wrapper">
+                                <ul id="history-list" class="history-list">
+                                    <!-- Dynamic items go here -->
+                                    <li class="empty-state">No search history recorded yet.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Weather Metrics Display -->
+                    <div class="grid-right">
+                        <!-- Weather Result Panel -->
+                        <div class="dash-card weather-display-card" id="weather-result-container">
+                            <div class="weather-empty-state">
+                                <div class="weather-globe"><i class="fa-solid fa-earth-americas"></i></div>
+                                <h3>No Weather Data Loaded</h3>
+                                <p>Search for a city above to fetch real-time data from the API and save logs to MongoDB.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+
+        <!-- FOOTER / DEBUG LOGGER PANELS -->
+        <footer class="app-footer">
+            <div class="footer-info">
+                <p>&copy; 2026 Cognifyz Full Stack Development Internship. All rights reserved.</p>
+            </div>
+            
+            <!-- API Debug Console Trigger -->
+            <button id="toggle-console-btn" class="btn btn-console"><i class="fa-solid fa-terminal"></i> API Request Inspector (<span id="console-log-count">0</span>)</button>
+
+            <!-- Collapsible Inspector Terminal -->
+            <div id="debug-console" class="debug-console">
+                <div class="console-header">
+                    <h4><i class="fa-solid fa-bug"></i> API HTTP Request/Response Inspector</h4>
+                    <div class="console-actions">
+                        <button id="clear-console-btn" class="btn btn-sm" title="Clear Console Log"><i class="fa-solid fa-circle-xmark"></i> Clear</button>
+                        <button id="close-console-btn" class="btn btn-sm" title="Close Console"><i class="fa-solid fa-chevron-down"></i> Minimize</button>
+                    </div>
+                </div>
+                <div class="console-body" id="console-logs">
+                    <!-- Logs populated here -->
+                    <div class="console-line system">Console initialized. Awaiting API requests...</div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Main JavaScript file -->
+    <script src="js/app.js"></script>
+</body>
+</html>
