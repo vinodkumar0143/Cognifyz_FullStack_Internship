@@ -1,0 +1,17 @@
+{
+  "name": "task-8-advanced-server-side-functionality",
+  "version": "1.0.0",
+  "description": "Task 8: Advanced Server-Side Functionality demonstrating middleware, Bull job queues, and Redis caching.",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "bull": "^4.16.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "ioredis": "^5.4.1"
+  }
+}

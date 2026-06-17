@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cognifyz Engine - Advanced Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <!-- Ambient background lighting effects -->
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+
+  <div class="app-container">
+    <header class="app-header">
+      <div class="logo">
+        <i class="fa-solid fa-bolt logo-icon"></i>
+        <h1>Cognifyz<span>Engine</span></h1>
+      </div>
+      <div class="status-panel">
+        <div class="status-badge" id="redis-status">
+          <span class="status-dot pulsing"></span>
+          <span class="status-text">Checking Redis...</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="dashboard-grid">
+      <!-- Caching Showcase -->
+      <section class="card glass-card caching-section">
+        <div class="card-header">
+          <div class="card-title">
+            <i class="fa-solid fa-database icon-accent"></i>
+            <h2>Server-Side Caching</h2>
+          </div>
+          <button class="btn btn-secondary btn-sm" id="btn-clear-cache" title="Evict cache key from Redis">
+            <i class="fa-solid fa-trash-can"></i> Evict Cache
+          </button>
+        </div>
+        <p class="card-desc">Tests database query performance using Redis caching. Cache TTL is set to 30 seconds.</p>
+        
+        <div class="cache-controls">
+          <button class="btn btn-primary btn-lg" id="btn-fetch-data">
+            <i class="fa-solid fa-paper-plane"></i> Fetch Stats API
+          </button>
+        </div>
+
+        <div class="metrics-grid">
+          <div class="metric-box">
+            <span class="metric-label">Cache Status</span>
+            <span class="metric-val status-miss" id="metric-cache-status">WAITING</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-label">Response Time</span>
+            <span class="metric-val" id="metric-response-time">0 ms</span>
+          </div>
+        </div>
+
+        <div class="response-chart-container">
+          <span class="chart-label">Request Response Timing (History)</span>
+          <div class="bar-chart" id="bar-chart">
+            <!-- Bars will be inserted dynamically -->
+          </div>
+        </div>
+
+        <div class="json-display-container">
+          <span class="json-label">API Response Payload</span>
+          <pre class="json-viewer" id="json-viewer">Click "Fetch Stats API" to make a request...</pre>
+        </div>
+      </section>
+
+      <!-- Background Queues -->
+      <section class="card glass-card queues-section">
+        <div class="card-header">
+          <div class="card-title">
+            <i class="fa-solid fa-circle-nodes icon-accent"></i>
+            <h2>Background Job Queues</h2>
+          </div>
+        </div>
+        <p class="card-desc">Simulate asynchronous, offloaded tasks managed via Redis & Bull queues.</p>
+        
+        <div class="job-actions">
+          <button class="btn btn-action" data-job="email">
+            <i class="fa-solid fa-envelope btn-action-icon text-email"></i>
+            <span class="btn-action-text">Dispatch Email</span>
+          </button>
+          
+          <button class="btn btn-action" data-job="report">
+            <i class="fa-solid fa-file-invoice-dollar btn-action-icon text-report"></i>
+            <span class="btn-action-text">Compile Report</span>
+          </button>
+
+          <button class="btn btn-action" data-job="notification">
+            <i class="fa-solid fa-bell btn-action-icon text-notification"></i>
+            <span class="btn-action-text">Send Notification</span>
+          </button>
+        </div>
+
+        <div class="job-list-container">
+          <span class="list-label">Active & Recent Jobs</span>
+          <div class="job-list" id="job-list">
+            <div class="empty-state">
+              <i class="fa-solid fa-inbox"></i>
+              <p>No jobs triggered yet in this session.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Server Logs Terminal -->
+      <section class="card glass-card terminal-card">
+        <div class="card-header">
+          <div class="card-title">
+            <i class="fa-solid fa-terminal icon-accent"></i>
+            <h2>Server Request Logger & Logs</h2>
+          </div>
+          <button class="btn btn-secondary btn-sm" id="btn-clear-logs">
+            <i class="fa-solid fa-eraser"></i> Clear console
+          </button>
+        </div>
+        <p class="card-desc">Real-time log stream from the custom request logger middleware and worker processes.</p>
+        
+        <div class="terminal-body" id="terminal-body">
+          <div class="log-line info">[SYS] Console log monitor started. Listening for requests...</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="/js/app.js"></script>
+</body>
+</html>
